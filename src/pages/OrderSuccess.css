@@ -1,0 +1,23 @@
+.success-page {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.success-page h1 {
+  color: green;
+  margin-bottom: 20px;
+}
+
+.success-page p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.success-page button {
+  padding: 12px 24px;
+  border: none;
+  background: #2874f0;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}

@@ -1,0 +1,38 @@
+.hero-slider{
+  position:relative;
+  width:100%;
+  height:400px;
+  overflow:hidden;
+}
+
+.hero-slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.hero-content{
+  position:absolute;
+  top:75%;
+  right:5%;
+  transform:translateY(-50%);
+  color:white;
+
+}
+
+.hero-content h1{
+  font-size:50px;
+}
+
+.hero-content p{
+  font-size:25px;
+  margin:15px 0;
+}
+
+.hero-content button{
+  background:#fb641b;
+  color:white;
+  border:none;
+  padding:12px 25px;
+  cursor:pointer;
+}

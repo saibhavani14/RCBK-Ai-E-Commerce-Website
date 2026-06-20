@@ -1,0 +1,53 @@
+.related-products {
+  margin-top: 40px;
+}
+
+.related-products h2 {
+  margin-bottom: 20px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit,
+    minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.related-card {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  box-shadow:
+    0 2px 10px rgba(0,0,0,.1);
+  transition: .3s;
+}
+
+.related-card:hover {
+  transform: translateY(-5px);
+}
+
+.related-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.related-card h4 {
+  margin-top: 10px;
+}
+
+.related-card p {
+  color: #2874f0;
+  font-weight: bold;
+}
+
+.related-card button {
+  background: #2874f0;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,0 +1,25 @@
+.admin-sidebar{
+  width:250px;
+  min-height:100vh;
+  background:#172337;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+}
+
+.admin-sidebar h2{
+  color:white;
+  margin-bottom:30px;
+}
+
+.admin-sidebar a{
+  color:white;
+  text-decoration:none;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:5px;
+}
+
+.admin-sidebar a:hover{
+  background:#2874f0;
+}

@@ -1,0 +1,39 @@
+.orders-container{
+  max-width:1100px;
+  margin:30px auto;
+  padding:20px;
+}
+
+.orders-container h1{
+  margin-bottom:20px;
+}
+
+.order-card{
+  background:white;
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.order-card p{
+  margin:8px 0;
+}
+
+.status{
+  color:green;
+  font-weight:bold;
+}
+
+.order-card button{
+  padding:10px 15px;
+  margin-right:10px;
+  border:none;
+  cursor:pointer;
+  background:#2874f0;
+  color:white;
+}
+
+.invoice-btn{
+  background:#fb641b !important;
+}

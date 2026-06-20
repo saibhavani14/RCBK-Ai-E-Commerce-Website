@@ -1,0 +1,44 @@
+.login-container{
+  width:800px;
+  margin:50px auto;
+  display:flex;
+  background:white;
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.login-left{
+  width:40%;
+  background:#2874f0;
+  color:white;
+  padding:40px;
+}
+
+.login-left h2{
+  margin-bottom:20px;
+}
+
+.login-right{
+  width:60%;
+  padding:40px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.login-right input{
+  padding:12px;
+  border:1px solid #ddd;
+}
+
+.login-btn{
+  padding:12px;
+  border:none;
+  background:#fb641b;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.login-btn:hover{
+  opacity:0.9;
+}
