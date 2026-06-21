@@ -27,8 +27,8 @@ function Checkout() {
 }, [navigate]);
 
   useEffect(() => {
-    fetchCart();
-  }, []);
+  fetchCart();
+}, [fetchCart]);
 
   const totalPrice = cartItems.reduce(
     (total, item) =>
