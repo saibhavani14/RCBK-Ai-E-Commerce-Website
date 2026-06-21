@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./Checkout.css";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
@@ -16,15 +16,15 @@ function Checkout() {
     address: "",
   });
 
-  const fetchCart = async () => {
-    try {
-      const response = await api.get("/cart/");
-      setCartItems(response.data);
-    } catch (error) {
-      alert("Please login first");
-      navigate("/login");
-    }
-  };
+  const fetchCart = useCallback(async () => {
+  try {
+    const response = await api.get("/cart/");
+    setCartItems(response.data);
+  } catch (error) {
+    alert("Please login first");
+    navigate("/login");
+  }
+}, [navigate]);
 
   useEffect(() => {
     fetchCart();
