@@ -87,10 +87,7 @@ function AppRoutes() {
   element={<OrderSuccess />}
 />
 
-<Route
-  path="/reset-password"
-  element={<ResetPassword />}
-/>
+<Route path="/reset-password" element={<ResetPassword />} />
 <Route
   path="/admin/add-product"
   element={<AddProduct />}
@@ -120,6 +117,8 @@ function AppRoutes() {
         
         <Route path="/ai" element={<AIAssistant />} />
         
+        
+
       </Routes>
     </BrowserRouter>
   );

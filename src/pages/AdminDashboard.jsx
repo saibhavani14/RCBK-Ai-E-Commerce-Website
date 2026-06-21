@@ -5,34 +5,25 @@ import api from "../api/api";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {
-  const [productsCount, setProductsCount] = useState(0);
-  const [ordersCount, setOrdersCount] = useState(0);
-  const [usersCount] = useState(1);
-  const [revenue, setRevenue] = useState(0);
+  const [stats, setStats] = useState({
+    products: 0,
+    orders: 0,
+    users: 0,
+    revenue: 0,
+  });
 
   useEffect(() => {
-    const fetchDashboardData = async () => {
+    const fetchStats = async () => {
       try {
-        const productsRes = await api.get("/products/");
-        const ordersRes = await api.get("/orders/");
-
-        setProductsCount(productsRes.data.length);
-        setOrdersCount(ordersRes.data.length);
-
-        const totalRevenue = ordersRes.data.reduce(
-          (total, order) =>
-            total + Number(order.total_amount),
-          0
-        );
-
-        setRevenue(totalRevenue);
+        const response = await api.get("/admin-stats/");
+        setStats(response.data);
       } catch (error) {
-        console.log(error);
-        alert("Failed to load dashboard data");
+        console.log("Dashboard stats error:", error.response?.data);
+        alert(JSON.stringify(error.response?.data || "Failed to load dashboard stats"));
       }
     };
 
-    fetchDashboardData();
+    fetchStats();
   }, []);
 
   return (
@@ -45,22 +36,22 @@ function AdminDashboard() {
 
           <div className="dashboard-cards">
             <div className="dashboard-card">
-              <h2>{productsCount}</h2>
+              <h2>{stats.products}</h2>
               <p>Products</p>
             </div>
 
             <div className="dashboard-card">
-              <h2>{ordersCount}</h2>
+              <h2>{stats.orders}</h2>
               <p>Orders</p>
             </div>
 
             <div className="dashboard-card">
-              <h2>{usersCount}</h2>
+              <h2>{stats.users}</h2>
               <p>Users</p>
             </div>
 
             <div className="dashboard-card">
-              <h2>₹{revenue}</h2>
+              <h2>₹{stats.revenue}</h2>
               <p>Revenue</p>
             </div>
           </div>

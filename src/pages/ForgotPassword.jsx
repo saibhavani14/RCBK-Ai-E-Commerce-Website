@@ -1,56 +1,67 @@
 import React, { useState } from "react";
-import Layout from "../components/layout/Layout";
-import { useNavigate } from "react-router-dom";
-import "./ForgetPassword.css";
+import { Link } from "react-router-dom";
+import api from "../api/api";
+import "./ForgotPassword.css";
 
 function ForgotPassword() {
-
   const [email, setEmail] = useState("");
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleSendOTP = () => {
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Please enter email");
+      return;
+    }
 
-    const otp = Math.floor(
-      100000 + Math.random() * 900000
-    );
+    try {
+      setLoading(true);
 
-    localStorage.setItem(
-      "fakeOTP",
-      otp
-    );
+      const response = await api.post(
+  "/forgot-password/",
+  { email },
+  {
+    headers: {
+      Authorization: "",
+    },
+  }
+);
 
-    alert(
-      `Demo OTP: ${otp}`
-    );
-
-    navigate("/otp-verification");
+      alert(response.data.message);
+     } catch (error) {
+  console.log("Forgot password error:", error.response?.data);
+  alert(JSON.stringify(error.response?.data || error.message));
+}
+finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <Layout>
-
-      <div className="auth-container">
-
+    <div className="forgot-container">
+      <div className="forgot-box">
         <h2>Forgot Password</h2>
+
+        <p>
+          Enter your registered email. We will send a
+          reset password link to your email.
+        </p>
 
         <input
           type="email"
-          placeholder="Enter Email"
+          placeholder="Enter registered email"
           value={email}
-          onChange={(e)=>
-            setEmail(e.target.value)
-          }
+          onChange={(e) => setEmail(e.target.value)}
         />
 
-        <button
-          onClick={handleSendOTP}
-        >
-          Send OTP
+        <button onClick={handleForgotPassword}>
+          {loading ? "Sending..." : "Send Reset Link"}
         </button>
 
+        <p>
+          <Link to="/login">Back to Login</Link>
+        </p>
       </div>
-
-    </Layout>
+    </div>
   );
 }
 

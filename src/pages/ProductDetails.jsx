@@ -12,16 +12,13 @@ function ProductDetails() {
   const { id } = useParams();
 
   const [product, setProduct] = useState(null);
-  const [selectedImage, setSelectedImage] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await api.get(`/products/${id}/`);
-
         setProduct(response.data);
-        setSelectedImage(response.data.image);
       } catch (error) {
         console.log(error);
       } finally {
@@ -80,19 +77,10 @@ function ProductDetails() {
       <div className="product-details-container">
         <div className="product-image">
           <img
-            src={selectedImage || product.image}
+            src={product.image}
             alt={product.name}
             className="main-image"
           />
-
-          <div className="gallery">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="thumbnail"
-              onClick={() => setSelectedImage(product.image)}
-            />
-          </div>
         </div>
 
         <div className="product-info">
@@ -104,7 +92,7 @@ function ProductDetails() {
           <p>{product.description}</p>
 
           <p>
-            <strong>Category:</strong> {product.category}
+            <strong>Category:</strong> {product.category_name || product.category}
           </p>
 
           <p>

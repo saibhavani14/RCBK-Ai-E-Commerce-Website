@@ -1,56 +1,46 @@
 import React, { useState } from "react";
-import Layout from "../components/layout/Layout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import api from "../api/api";
 
 function ResetPassword() {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const [password,setPassword] =
-    useState("");
+  const uid = searchParams.get("uid");
+  const token = searchParams.get("token");
 
-  const navigate =
-    useNavigate();
+  const [password, setPassword] = useState("");
 
-  const handleReset = () => {
+  const handleReset = async () => {
+    try {
+      await api.post("/reset-password/", {
+        uid,
+        token,
+        password,
+      });
 
-    localStorage.setItem(
-      "newPassword",
-      password
-    );
-
-    alert(
-      "Password Updated Successfully"
-    );
-
-    navigate("/login");
+      alert("Password reset successful");
+      navigate("/login");
+    } catch (error) {
+      alert(JSON.stringify(error.response?.data));
+    }
   };
 
   return (
-    <Layout>
+    <div className="reset-password-page">
+      <h2>Reset Password</h2>
 
-      <div className="auth-container">
+      <input
+        type="password"
+        placeholder="Enter new password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
-        <h2>
-          Reset Password
-        </h2>
-
-        <input
-          type="password"
-          placeholder="New Password"
-          value={password}
-          onChange={(e)=>
-            setPassword(e.target.value)
-          }
-        />
-
-        <button
-          onClick={handleReset}
-        >
-          Update Password
-        </button>
-
-      </div>
-
-    </Layout>
+      <button onClick={handleReset}>
+        Reset Password
+      </button>
+    </div>
   );
 }
 

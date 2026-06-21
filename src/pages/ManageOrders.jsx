@@ -27,11 +27,10 @@ function ManageOrders() {
       });
 
       fetchOrders();
-
-      alert("Order Updated");
+      alert("Order Status Updated");
     } catch (error) {
-      console.log(error);
-      alert("Failed to update order");
+      console.log("Orders error:", error.response?.data);
+      alert(JSON.stringify(error.response?.data || "Failed to load orders"));
     }
   };
 
@@ -47,46 +46,32 @@ function ManageOrders() {
               <th>Total Amount</th>
               <th>Status</th>
               <th>Date</th>
-              <th>Action</th>
+              <th>Update Status</th>
             </tr>
           </thead>
 
           <tbody>
             {orders.map((order) => (
               <tr key={order.id}>
-                <td>{order.id}</td>
-
+                <td>#{order.id}</td>
                 <td>₹{order.total_amount}</td>
-
                 <td>{order.status}</td>
-
-                <td>
-                  {new Date(
-                    order.created_at
-                  ).toLocaleDateString()}
-                </td>
+                <td>{new Date(order.created_at).toLocaleDateString()}</td>
 
                 <td>
                   <select
                     value={order.status}
                     onChange={(e) =>
-                      updateStatus(
-                        order.id,
-                        e.target.value
-                      )
+                      updateStatus(order.id, e.target.value)
                     }
                   >
-                    <option value="Pending">
-                      Pending
+                    <option value="Processing">Processing</option>
+                    <option value="Packed">Packed</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Out For Delivery">
+                      Out For Delivery
                     </option>
-
-                    <option value="Processing">
-                      Processing
-                    </option>
-
-                    <option value="Delivered">
-                      Delivered
-                    </option>
+                    <option value="Delivered">Delivered</option>
                   </select>
                 </td>
               </tr>

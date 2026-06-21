@@ -5,10 +5,24 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("accessToken");
+
+  const publicUrls = [
+    "/forgot-password/",
+    "/reset-password/",
+    "/products/",
+    "/ai-search/",
+  ];
+
+  if (publicUrls.includes(config.url)) {
+    return config;
+  }
+
+  const token =
+    localStorage.getItem("accessToken");
 
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization =
+      `Bearer ${token}`;
   }
 
   return config;
